@@ -5,7 +5,7 @@
 | `00` | Analysis Master Plan | seeded | initial |
 | `01` | Repository Inventory | completed | |
 | `02` | Core Abstractions | completed | |
-| `03` | Entrypoints | pending | |
+| `03` | Entrypoints | completed | |
 | `04` | High-Level Call Flow | pending | |
 | `05` | Config System | pending | |
 | `06` | Provider System | pending | |

@@ -83,11 +83,13 @@ This matches the README claim that Opencode uses a client/server architecture ra
 
 At a high level, the architecture appears to flow through:
 
-1. CLI or server entrypoint creation
-2. config/installation/bootstrap checks
-3. instance-bound service initialization
-4. session, agent, provider, tool, and plugin interaction
-5. bus/sync events plus storage-backed state changes
+1. wrapper/binary resolution or direct dev launch
+2. CLI construction in `src/index.ts`
+3. process-level logging and migration middleware
+4. command dispatch
+5. instance-bound bootstrap for project-scoped commands, or deferred bootstrap at request time for server mode
+6. session, agent, provider, tool, and plugin interaction
+7. bus/sync events plus storage-backed state changes
 
 Detailed confirmation of this path belongs to later entrypoint and call-flow tasks.
 
