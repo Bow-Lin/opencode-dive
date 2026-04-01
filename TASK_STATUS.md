@@ -8,7 +8,7 @@
 | `03` | Entrypoints | completed | |
 | `04` | High-Level Call Flow | completed | |
 | `05` | Config System | completed | |
-| `06` | Provider System | pending | |
+| `06` | Provider System | completed | |
 | `07` | Tool System | pending | |
 | `08` | Runtime Orchestration | pending | |
 | `09` | Memory / Session | pending | |
