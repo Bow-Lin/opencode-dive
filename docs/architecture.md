@@ -146,6 +146,22 @@ The clearest ownership model confirmed so far is:
 
 This means `Bus` is important for notification and integration, but it is not the primary dispatcher driving the interactive loop. `SyncEvent` is present on the hot write path through `Session.*` persistence updates, yet its role is durable event projection/replay rather than prompt-loop scheduling.
 
+## Extension Architecture
+
+The extension story is hybrid:
+
+- server plugins:
+  - loaded by `plugin/index.ts`
+  - inject hooks into runtime flows such as tool definition/execution and chat message transforms
+- TUI plugins:
+  - loaded by `cli/cmd/tui/plugin/runtime.ts`
+  - extend the UI shell with routes, slots, themes, and commands
+- skills:
+  - discovered by `skill/index.ts`
+  - exposed through system prompt inventory, `skill` tool loading, and command listing
+
+This is important because "plugin" is not a single runtime abstraction in Opencode. Skills are content-oriented extensions, server plugins are hook-oriented extensions, and TUI plugins are UI-runtime extensions. They share some config/spec machinery, but they do not share one lifecycle.
+
 ## Module Boundaries
 
 The strongest explicit module boundaries so far are:
@@ -164,6 +180,7 @@ These boundaries are explicit at the directory level and reinforced by service i
 - Tools, commands, skills, plugins, and MCP prompts all act as extensibility surfaces, which increases flexibility but also creates multiple registration paths to reason about.
 - The coexistence of transient bus events and persistent sync events introduces two signaling models that later tasks need to separate carefully.
 - The runtime orchestration center is concentrated in `session/prompt.ts`, which simplifies where to look for control flow but creates a high-complexity hotspot.
+- Extension behavior is context-sensitive because server plugins, TUI plugins, and skills are related but not interchangeable mechanisms.
 
 ## Evidence Requirements
 
