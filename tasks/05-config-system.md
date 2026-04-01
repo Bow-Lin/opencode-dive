@@ -12,13 +12,13 @@ Explain how configuration is defined, loaded, validated, and overridden.
 
 ## Must Read
 
-- `docs/modules/config.md`
-- `docs/callflows/startup.md`
+- `docs/{en,zh}/modules/config.md`
+- `docs/{en,zh}/callflows/startup.md`
 
 ## Expected Output
 
 - `reports/run-YYYY-MM-DD/config-system.md`
-- updates to `docs/modules/config.md`
+- updates to `docs/{en,zh}/modules/config.md`
 
 ## Completion Standard
 

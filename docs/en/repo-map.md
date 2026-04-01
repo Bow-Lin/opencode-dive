@@ -6,7 +6,8 @@ This repository is the analysis control plane, not the Opencode source itself.
 
 ### Top-Level Directories
 
-- `docs/`: curated technical knowledge
+- `docs/en/`: English final deliverables
+- `docs/zh/`: Chinese final deliverables
 - `tasks/`: bounded analysis tasks
 - `templates/`: stable output formats
 - `reports/`: run-scoped findings

@@ -13,14 +13,14 @@ Map the major control path at a system level before diving into config, provider
 
 ## Must Read
 
-- `docs/callflows/startup.md`
-- `docs/architecture.md`
+- `docs/{en,zh}/callflows/startup.md`
+- `docs/{en,zh}/architecture.md`
 - `tasks/03-entrypoints.md`
 
 ## Expected Output
 
 - `reports/run-YYYY-MM-DD/high-level-callflow.md`
-- updates to `docs/architecture.md`
+- updates to `docs/{en,zh}/architecture.md`
 
 ## Completion Standard
 

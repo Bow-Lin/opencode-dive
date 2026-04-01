@@ -27,8 +27,8 @@ Define the sequence for analyzing a pinned Opencode version from inventory throu
 
 ## Long-Term Outputs
 
-- `docs/repo-map.md`
-- `docs/architecture.md`
-- `docs/modules/*.md`
-- `docs/callflows/*.md`
-- `docs/version-notes/*.md`
+- `docs/{en,zh}/repo-map.md`
+- `docs/{en,zh}/architecture.md`
+- `docs/{en,zh}/modules/*.md`
+- `docs/{en,zh}/callflows/*.md`
+- `docs/{en,zh}/version-notes/*.md`

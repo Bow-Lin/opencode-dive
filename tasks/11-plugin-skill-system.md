@@ -13,14 +13,14 @@ Explain how plugins, skills, or other extension points are discovered, loaded, a
 
 ## Must Read
 
-- `docs/modules/plugins.md`
-- `docs/architecture.md`
+- `docs/{en,zh}/modules/plugins.md`
+- `docs/{en,zh}/architecture.md`
 
 ## Expected Output
 
 - `reports/run-YYYY-MM-DD/plugin-skill-system.md`
-- updates to `docs/modules/plugins.md`
-- updates to `docs/architecture.md`
+- updates to `docs/{en,zh}/modules/plugins.md`
+- updates to `docs/{en,zh}/architecture.md`
 
 ## Completion Standard
 

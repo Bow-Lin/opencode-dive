@@ -13,14 +13,14 @@ Build an initial map of the pinned Opencode source tree and identify likely entr
 ## Must Read
 
 - `OPENCODE_VERSION.md`
-- `docs/analysis-rules.md`
+- `docs/{en,zh}/analysis-rules.md`
 - `scripts/tree.sh`
 - `scripts/generate-file-index.py`
 
 ## Expected Output
 
 - run-scoped notes in `reports/run-YYYY-MM-DD/inventory.md`
-- updates to `docs/repo-map.md`
+- updates to `docs/{en,zh}/repo-map.md`
 
 ## Completion Standard
 

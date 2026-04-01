@@ -13,14 +13,14 @@ Identify the central abstractions that organize the pinned Opencode version befo
 
 ## Must Read
 
-- `docs/repo-map.md`
-- `docs/architecture.md`
+- `docs/{en,zh}/repo-map.md`
+- `docs/{en,zh}/architecture.md`
 - `scripts/symbol-grep.sh`
 
 ## Expected Output
 
 - `reports/run-YYYY-MM-DD/core-abstractions.md`
-- updates to `docs/architecture.md`
+- updates to `docs/{en,zh}/architecture.md`
 
 ## Completion Standard
 

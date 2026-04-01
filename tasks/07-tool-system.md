@@ -12,15 +12,15 @@ Explain how tools are discovered, selected, executed, and returned into the runt
 
 ## Must Read
 
-- `docs/modules/tools.md`
-- `docs/callflows/tool-call-execution.md`
+- `docs/{en,zh}/modules/tools.md`
+- `docs/{en,zh}/callflows/tool-call-execution.md`
 - `scripts/symbol-grep.sh`
 
 ## Expected Output
 
 - `reports/run-YYYY-MM-DD/tool-runtime-findings.md`
-- updates to `docs/modules/tools.md`
-- updates to `docs/callflows/tool-call-execution.md`
+- updates to `docs/{en,zh}/modules/tools.md`
+- updates to `docs/{en,zh}/callflows/tool-call-execution.md`
 
 ## Completion Standard
 

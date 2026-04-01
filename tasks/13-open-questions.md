@@ -18,7 +18,7 @@ Collect unresolved findings, ambiguities, and follow-up probes after the main an
 ## Expected Output
 
 - `reports/run-YYYY-MM-DD/open-questions.md`
-- optional updates to `docs/architecture.md` or module docs where uncertainty should remain visible
+- optional updates to `docs/{en,zh}/architecture.md` or module docs where uncertainty should remain visible
 
 ## Completion Standard
 

@@ -12,14 +12,14 @@ Explain how session state is created, updated, persisted, and restored.
 
 ## Must Read
 
-- `docs/modules/session.md`
-- `docs/callflows/session-persistence.md`
+- `docs/{en,zh}/modules/session.md`
+- `docs/{en,zh}/callflows/session-persistence.md`
 
 ## Expected Output
 
 - `reports/run-YYYY-MM-DD/session-state.md`
-- updates to `docs/modules/session.md`
-- updates to `docs/callflows/session-persistence.md`
+- updates to `docs/{en,zh}/modules/session.md`
+- updates to `docs/{en,zh}/callflows/session-persistence.md`
 
 ## Completion Standard
 

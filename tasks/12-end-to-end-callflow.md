@@ -14,17 +14,17 @@ Produce a single, code-anchored end-to-end flow from user input to final output,
 
 ## Must Read
 
-- `docs/callflows/startup.md`
-- `docs/callflows/prompt-to-model.md`
-- `docs/callflows/tool-call-execution.md`
-- `docs/callflows/session-persistence.md`
-- `docs/callflows/end-to-end-user-request.md`
+- `docs/{en,zh}/callflows/startup.md`
+- `docs/{en,zh}/callflows/prompt-to-model.md`
+- `docs/{en,zh}/callflows/tool-call-execution.md`
+- `docs/{en,zh}/callflows/session-persistence.md`
+- `docs/{en,zh}/callflows/end-to-end-user-request.md`
 
 ## Expected Output
 
 - `reports/run-YYYY-MM-DD/end-to-end-callflow.md`
-- updates to `docs/callflows/end-to-end-user-request.md`
-- updates to `docs/architecture.md`
+- updates to `docs/{en,zh}/callflows/end-to-end-user-request.md`
+- updates to `docs/{en,zh}/architecture.md`
 
 ## Completion Standard
 

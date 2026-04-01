@@ -7,7 +7,7 @@ This repository is an agent-friendly analysis workbench for studying one specifi
 Primary goals:
 
 - Analyze a pinned Opencode version from overall architecture down to concrete code paths.
-- Produce durable technical documentation in `docs/`.
+- Produce durable technical documentation in `docs/en/` and `docs/zh/`.
 - Keep transient findings, open questions, and rough notes in `reports/`.
 - Make every important conclusion traceable to concrete code evidence.
 
@@ -30,7 +30,7 @@ Out of scope unless a task file says otherwise:
 
 ## Working Rules
 
-1. Treat `docs/` as the long-term knowledge base and `reports/` as disposable working output.
+1. Treat `docs/en/` and `docs/zh/` as the mirrored long-term knowledge base and `reports/` as disposable working output.
 2. Read `OPENCODE_VERSION.md` before deep analysis. If version metadata is incomplete, state that limitation explicitly.
 3. Start global, then narrow:
    - repository metadata and top-level layout
@@ -46,6 +46,7 @@ Out of scope unless a task file says otherwise:
 6. Do not describe a module only by folder names. Explain responsibilities, key types, and upstream/downstream dependencies.
 7. Do not present speculative claims as facts. Mark unresolved points as `Pending verification`.
 8. Prefer updating existing canonical docs over creating duplicative notes.
+9. When promoting stable conclusions, keep English and Chinese final docs structurally aligned.
 
 ## Required Workflow
 
@@ -54,19 +55,19 @@ For a new analysis pass:
 1. Read:
    - `README.md`
    - `OPENCODE_VERSION.md`
-   - `docs/overview.md`
-   - `docs/analysis-rules.md`
+   - `docs/en/overview.md` or `docs/zh/overview.md`
+   - `docs/en/analysis-rules.md` or `docs/zh/analysis-rules.md`
    - the relevant file in `tasks/`
 2. Generate or refresh the repository inventory.
 3. Locate entrypoints and initialization logic.
 4. Trace the target flow/module through concrete symbols and call sites.
 5. Write findings to `reports/run-YYYY-MM-DD/` first if they are exploratory.
-6. Promote stable conclusions into `docs/` using the templates in `templates/`.
+6. Promote stable conclusions into `docs/en/` and `docs/zh/` using the templates in `templates/`.
 7. Update open questions when evidence is incomplete.
 
 ## Output Contracts
 
-Each module analysis in `docs/modules/` must contain:
+Each module analysis in `docs/{en,zh}/modules/` must contain:
 
 - Module responsibility
 - Key files
@@ -78,7 +79,7 @@ Each module analysis in `docs/modules/` must contain:
 - Design tradeoffs or risks
 - Pending verification items
 
-Each call-flow analysis in `docs/callflows/` must contain:
+Each call-flow analysis in `docs/{en,zh}/callflows/` must contain:
 
 - Trigger
 - Start file/symbol
@@ -90,7 +91,8 @@ Each call-flow analysis in `docs/callflows/` must contain:
 
 ## Directory Conventions
 
-- `docs/`: durable knowledge after review
+- `docs/en/`: English durable knowledge after review
+- `docs/zh/`: Chinese durable knowledge after review
 - `tasks/`: bounded analysis tasks with input scope and exit criteria
 - `templates/`: required structure for repeatable output
 - `reports/`: run-scoped exploratory artifacts

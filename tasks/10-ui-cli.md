@@ -12,14 +12,14 @@ Explain the user-facing shell and how it interacts with the runtime.
 
 ## Must Read
 
-- `docs/modules/cli.md`
-- `docs/modules/ui.md`
+- `docs/{en,zh}/modules/cli.md`
+- `docs/{en,zh}/modules/ui.md`
 
 ## Expected Output
 
 - `reports/run-YYYY-MM-DD/ui-cli.md`
-- updates to `docs/modules/cli.md`
-- updates to `docs/modules/ui.md`
+- updates to `docs/{en,zh}/modules/cli.md`
+- updates to `docs/{en,zh}/modules/ui.md`
 
 ## Completion Standard
 

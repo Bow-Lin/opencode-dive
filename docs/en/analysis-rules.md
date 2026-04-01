@@ -4,7 +4,7 @@
 
 1. Evidence before abstraction.
 2. Entry flow before edge cases.
-3. Durable docs in `docs/`, noisy exploration in `reports/`.
+3. Durable docs in `docs/{en,zh}/`, noisy exploration in `reports/`.
 4. Version boundaries must be explicit.
 5. Unknowns must remain visible.
 
@@ -44,3 +44,4 @@ A call flow is confirmed only when:
 - Use exact file paths and symbol names.
 - Separate fact from interpretation.
 - Avoid generic summaries that could apply to any codebase.
+- Keep English and Chinese document structures aligned when a file exists in both trees.

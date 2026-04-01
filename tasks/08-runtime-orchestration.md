@@ -13,14 +13,14 @@ Explain the main orchestration layer that coordinates user interaction, model ca
 
 ## Must Read
 
-- `docs/modules/runtime.md`
-- `docs/architecture.md`
+- `docs/{en,zh}/modules/runtime.md`
+- `docs/{en,zh}/architecture.md`
 
 ## Expected Output
 
 - `reports/run-YYYY-MM-DD/runtime-orchestration.md`
-- updates to `docs/modules/runtime.md`
-- updates to `docs/architecture.md`
+- updates to `docs/{en,zh}/modules/runtime.md`
+- updates to `docs/{en,zh}/architecture.md`
 
 ## Completion Standard
 

@@ -12,14 +12,14 @@ Explain how Opencode selects providers/models and issues model calls.
 
 ## Must Read
 
-- `docs/modules/provider.md`
-- `docs/callflows/prompt-to-model.md`
+- `docs/{en,zh}/modules/provider.md`
+- `docs/{en,zh}/callflows/prompt-to-model.md`
 
 ## Expected Output
 
 - `reports/run-YYYY-MM-DD/provider-system.md`
-- updates to `docs/modules/provider.md`
-- updates to `docs/callflows/prompt-to-model.md`
+- updates to `docs/{en,zh}/modules/provider.md`
+- updates to `docs/{en,zh}/callflows/prompt-to-model.md`
 
 ## Completion Standard
 
