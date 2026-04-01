@@ -11,8 +11,8 @@
 | `06` | Provider System | completed | `a8d048c` |
 | `07` | Tool System | completed | `c8220fc` |
 | `08` | Runtime Orchestration | completed | `702421b` |
-| `09` | Memory / Session | completed | `this-commit` |
-| `10` | UI / CLI | pending | |
+| `09` | Memory / Session | completed | `41ee7cf` |
+| `10` | UI / CLI | completed | `this-commit` |
 | `11` | Plugin / Skill System | pending | |
 | `12` | End-To-End Call Flow | pending | |
 | `13` | Open Questions | pending | |
