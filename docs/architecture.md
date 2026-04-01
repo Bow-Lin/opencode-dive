@@ -108,6 +108,22 @@ The dominant interactive path currently looks like this:
 
 This is the main control path for analysis because it crosses the CLI surface, server surface, instance scoping, and the session orchestration core.
 
+## End-To-End Interaction Spine
+
+The most representative end-to-end path currently looks like:
+
+1. user action in CLI/TUI,
+2. client-side normalization,
+3. SDK/control-plane request,
+4. workspace instance binding,
+5. `SessionPrompt` orchestration,
+6. `SessionProcessor` streamed execution,
+7. provider/tool interaction,
+8. sync-backed session persistence,
+9. client-side rendering from events or synchronized state.
+
+This spine is useful because it connects the earlier module analyses into one ordered control chain. It also clarifies that final output is not just "model text": it is simultaneously a rendered client artifact, a set of persisted session/message/part rows, and sometimes a series of tool side effects.
+
 ## Runtime Orchestration Core
 
 The main runtime orchestrator is `workspace/source/opencode/packages/opencode/src/session/prompt.ts`, not the server router, CLI command handler, or event bus.

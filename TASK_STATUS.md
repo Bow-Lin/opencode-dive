@@ -13,6 +13,6 @@
 | `08` | Runtime Orchestration | completed | `702421b` |
 | `09` | Memory / Session | completed | `41ee7cf` |
 | `10` | UI / CLI | completed | `7aa7c3c` |
-| `11` | Plugin / Skill System | completed | `this-commit` |
-| `12` | End-To-End Call Flow | pending | |
+| `11` | Plugin / Skill System | completed | `334d75b` |
+| `12` | End-To-End Call Flow | completed | `this-commit` |
 | `13` | Open Questions | pending | |
