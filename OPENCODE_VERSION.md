@@ -1,10 +1,11 @@
 # OPENCODE_VERSION
 
 - Project: opencode
-- Version: `vX.Y.Z`
-- Commit: `abcdef123456`
-- Source: `<repo-url>`
-- Source root: `workspace/source/`
+- Version: `1.3.13`
+- Commit: `c8ecd640220331ce7695d72ea8c618dd8909eab1`
+- Tag/Describe: `v1.3.13-4-gc8ecd6402`
+- Source: `https://github.com/anomalyco/opencode`
+- Source root: `workspace/source/opencode`
 
 ## Analysis Scope
 
