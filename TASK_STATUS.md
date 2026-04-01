@@ -7,7 +7,7 @@
 | `02` | Core Abstractions | completed | |
 | `03` | Entrypoints | completed | |
 | `04` | High-Level Call Flow | completed | |
-| `05` | Config System | pending | |
+| `05` | Config System | completed | |
 | `06` | Provider System | pending | |
 | `07` | Tool System | pending | |
 | `08` | Runtime Orchestration | pending | |
