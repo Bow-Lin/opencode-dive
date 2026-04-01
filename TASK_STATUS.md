@@ -10,8 +10,8 @@
 | `05` | Config System | completed | `af4f0f6` |
 | `06` | Provider System | completed | `a8d048c` |
 | `07` | Tool System | completed | `c8220fc` |
-| `08` | Runtime Orchestration | completed | `this-commit` |
-| `09` | Memory / Session | pending | |
+| `08` | Runtime Orchestration | completed | `702421b` |
+| `09` | Memory / Session | completed | `this-commit` |
 | `10` | UI / CLI | pending | |
 | `11` | Plugin / Skill System | pending | |
 | `12` | End-To-End Call Flow | pending | |
