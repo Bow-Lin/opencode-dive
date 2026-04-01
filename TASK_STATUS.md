@@ -6,7 +6,7 @@
 | `01` | Repository Inventory | completed | |
 | `02` | Core Abstractions | completed | |
 | `03` | Entrypoints | completed | |
-| `04` | High-Level Call Flow | pending | |
+| `04` | High-Level Call Flow | completed | |
 | `05` | Config System | pending | |
 | `06` | Provider System | pending | |
 | `07` | Tool System | pending | |

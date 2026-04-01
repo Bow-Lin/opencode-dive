@@ -93,6 +93,21 @@ At a high level, the architecture appears to flow through:
 
 Detailed confirmation of this path belongs to later entrypoint and call-flow tasks.
 
+## High-Level Request Pipeline
+
+The dominant interactive path currently looks like this:
+
+1. A CLI command such as `run` is selected in `packages/opencode/src/index.ts`.
+2. The command enters `cli/bootstrap.ts`, which establishes project/worktree context through `Instance.provide(..., init: InstanceBootstrap)`.
+3. The CLI constructs an internal SDK client whose `fetch` implementation points at `Server.Default().fetch(...)`.
+4. The SDK issues session API calls against the in-process Hono app rather than crossing a real network boundary.
+5. `ControlPlaneRoutes` hands project-scoped requests to `WorkspaceRouterMiddleware`, which ensures the correct instance is active.
+6. `InstanceRoutes` dispatches to route groups such as `SessionRoutes`.
+7. Session mutation endpoints delegate into `SessionPrompt.*`, `Session.*`, `SessionStatus.*`, and related services.
+8. `SessionPrompt` then coordinates downstream concerns including agent selection, provider/model access, tool registry, permissions, MCP/LSP, and session processing.
+
+This is the main control path for analysis because it crosses the CLI surface, server surface, instance scoping, and the session orchestration core.
+
 ## Module Boundaries
 
 The strongest explicit module boundaries so far are:
