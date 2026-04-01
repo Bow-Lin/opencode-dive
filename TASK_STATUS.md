@@ -9,8 +9,8 @@
 | `04` | High-Level Call Flow | completed | `4d3e276` |
 | `05` | Config System | completed | `af4f0f6` |
 | `06` | Provider System | completed | `a8d048c` |
-| `07` | Tool System | completed | `this-commit` |
-| `08` | Runtime Orchestration | pending | |
+| `07` | Tool System | completed | `c8220fc` |
+| `08` | Runtime Orchestration | completed | `this-commit` |
 | `09` | Memory / Session | pending | |
 | `10` | UI / CLI | pending | |
 | `11` | Plugin / Skill System | pending | |

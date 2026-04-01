@@ -108,6 +108,44 @@ The dominant interactive path currently looks like this:
 
 This is the main control path for analysis because it crosses the CLI surface, server surface, instance scoping, and the session orchestration core.
 
+## Runtime Orchestration Core
+
+The main runtime orchestrator is `workspace/source/opencode/packages/opencode/src/session/prompt.ts`, not the server router, CLI command handler, or event bus.
+
+Observed control split:
+
+- transport surfaces:
+  - CLI `run.ts`
+  - server routes in `server/routes/session.ts`
+- instance/workspace boundary:
+  - `WorkspaceRouterMiddleware`
+  - `Instance.provide(..., init: InstanceBootstrap)`
+- orchestration core:
+  - `SessionPrompt.prompt(...)`
+  - `SessionPrompt.loop(...)`
+  - internal `runLoop(sessionID)`
+- stream execution layer:
+  - `SessionProcessor.process(...)`
+  - `LLM.stream(...)`
+- side-channel signaling:
+  - `SessionStatus`
+  - `Bus`
+
+The most important architectural consequence is that Opencode has a shared backend orchestration core reused by multiple front doors. The CLI often talks to that core through an in-process SDK client wired to `Server.Default().fetch(...)`, which means the server surface is not merely remote deployment plumbing; it is also the local control API.
+
+## Control Ownership
+
+The clearest ownership model confirmed so far is:
+
+1. transport layer accepts request and validates shape;
+2. instance layer establishes directory/worktree context;
+3. `SessionPrompt` enters the Effect runtime via exported `runPromise(...)` wrappers and owns session-level control flow and loop policy;
+4. `SessionProcessor` owns event-by-event consumption of one model run;
+5. provider/tool/session modules execute delegated responsibilities;
+6. bus/status layers publish observable state outward.
+
+This means `Bus` is important for notification and integration, but it is not the primary dispatcher driving the interactive loop. `SyncEvent` is present on the hot write path through `Session.*` persistence updates, yet its role is durable event projection/replay rather than prompt-loop scheduling.
+
 ## Module Boundaries
 
 The strongest explicit module boundaries so far are:
@@ -125,6 +163,7 @@ These boundaries are explicit at the directory level and reinforced by service i
 - The service pattern is consistent, but the number of subsystems and default layers can make dependency wiring hard to follow without call-flow tracing.
 - Tools, commands, skills, plugins, and MCP prompts all act as extensibility surfaces, which increases flexibility but also creates multiple registration paths to reason about.
 - The coexistence of transient bus events and persistent sync events introduces two signaling models that later tasks need to separate carefully.
+- The runtime orchestration center is concentrated in `session/prompt.ts`, which simplifies where to look for control flow but creates a high-complexity hotspot.
 
 ## Evidence Requirements
 
