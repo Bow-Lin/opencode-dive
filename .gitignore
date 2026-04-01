@@ -1,0 +1,12 @@
+.DS_Store
+*.log
+
+workspace/source/*
+!workspace/source/.gitkeep
+
+workspace/notes/*
+!workspace/notes/.gitkeep
+
+reports/run-*/
+!reports/run-2026-04-01/
+!reports/run-2026-04-01/README.md
