@@ -10,6 +10,8 @@ The runtime orchestration layer coordinates the interactive session loop after a
 - delegating stream execution to the LLM and processor layers,
 - and deciding when the loop should continue, compact, stop, or switch into subtask/shell flows.
 
+Detailed file-level analysis of the orchestration core lives in `session-prompt.md`. That page explains why `session/prompt.ts` is not just a prompt-template file and why it owns so much runtime control.
+
 ## Key Files
 
 | File | Role | Evidence |

@@ -10,6 +10,8 @@
 - 把流式执行委托给 LLM 和 processor 层，
 - 并决定 loop 什么时候继续、compact、停止，或切换到 subtask / shell 分支。
 
+关于编排核心文件的更细分析，见 `session-prompt.md`。那篇文档专门解释了为什么 `session/prompt.ts` 并不只是提示词模板文件，以及为什么它实际掌握了这么多运行时控制权。
+
 ## 关键文件
 
 | File | Role | Evidence |
