@@ -65,20 +65,20 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-    Start[用户运行 opencode]
-    Bin[bin/opencode wrapper]
-    Dev[dev 脚本 -> src/index.ts]
-    Index[src/index.ts]
-    Yargs[yargs parser + middleware]
-    Run[run / session commands]
-    TuiCmd[TUI commands]
-    Serve[serve command]
-    Bootstrap[cli/bootstrap.ts]
-    InstanceBootstrap[InstanceBootstrap]
-    LocalSDK[本地 SDK client]
-    ServerFetch[Server.Default().fetch]
-    Listen[Server.listen]
-    Router[WorkspaceRouterMiddleware]
+    Start["用户运行 opencode"]
+    Bin["bin/opencode wrapper"]
+    Dev["dev 脚本 -> src/index.ts"]
+    Index["src/index.ts"]
+    Yargs["yargs parser + middleware"]
+    Run["run / session commands"]
+    TuiCmd["TUI commands"]
+    Serve["serve command"]
+    Bootstrap["cli/bootstrap.ts"]
+    InstanceBootstrap["InstanceBootstrap"]
+    LocalSDK["本地 SDK client"]
+    ServerFetch["Server.Default().fetch"]
+    Listen["Server.listen"]
+    Router["WorkspaceRouterMiddleware"]
 
     Start --> Bin
     Start --> Dev
@@ -237,17 +237,17 @@ sequenceDiagram
 ```mermaid
 stateDiagram-v2
     [*] --> Created
-    Created --> Idle: session created
-    Idle --> Running: prompt / command / shell starts
-    Running --> ToolExecuting: model emits tool call
-    ToolExecuting --> Running: tool result returned
-    Running --> Compacting: overflow / auto-compaction
-    Compacting --> Running: compacted context resumes
-    Running --> WaitingPermission: permission prompt required
-    WaitingPermission --> Running: permission reply received
-    Running --> Idle: assistant turn completes
-    Running --> Error: unrecovered provider / tool failure
-    Error --> Idle: status cleared or retry path
+    Created --> Idle: create
+    Idle --> Running: start
+    Running --> ToolExecuting: tool call
+    ToolExecuting --> Running: tool done
+    Running --> Compacting: compact
+    Compacting --> Running: resume
+    Running --> WaitingPermission: need auth
+    WaitingPermission --> Running: approved
+    Running --> Idle: done
+    Running --> Error: failed
+    Error --> Idle: reset
     Idle --> [*]
 ```
 
@@ -302,6 +302,44 @@ flowchart TD
 - `workspace/source/opencode/packages/opencode/src/skill/index.ts`
 - `workspace/source/opencode/packages/opencode/src/skill/discovery.ts`
 - `workspace/source/opencode/packages/opencode/src/tool/skill.ts`
+
+## 8. SessionPrompt、SyncEvent 与 Bus 的边界图
+
+这张图专门用来澄清一个很容易出现的误解：`Bus` 不是 Opencode 的单一控制主干。`SessionPrompt` 掌管交互式编排，`SyncEvent` 掌管持久化投影链路，而 `Bus` 负责把运行时中的可观察通知向外传播。
+
+```mermaid
+flowchart TD
+    User[用户请求]
+    Routes[CLI / TUI / Server Routes]
+    Prompt[SessionPrompt<br/>控制流所有者]
+    Processor[SessionProcessor / LLM loop]
+    Session[Session APIs]
+    Sync[SyncEvent.run<br/>projectors / DB]
+    Bus[Bus.publish<br/>实例级通知层]
+    SSE[SSE / event subscribers]
+    UI[UI / CLI observers]
+    Plugins[Plugins / watchers / status listeners]
+
+    User --> Routes
+    Routes --> Prompt
+    Prompt --> Processor
+    Prompt --> Session
+    Session --> Sync
+    Sync -. 可选 republish .-> Bus
+    Prompt -. 状态与侧向事件 .-> Bus
+    Bus --> SSE
+    Bus --> UI
+    Bus --> Plugins
+```
+
+主要代码锚点：
+
+- `workspace/source/opencode/packages/opencode/src/session/prompt.ts`
+- `workspace/source/opencode/packages/opencode/src/session/index.ts`
+- `workspace/source/opencode/packages/opencode/src/sync/index.ts`
+- `workspace/source/opencode/packages/opencode/src/bus/index.ts`
+- `workspace/source/opencode/packages/opencode/src/server/routes/event.ts`
+- `workspace/source/opencode/packages/opencode/src/session/status.ts`
 
 ## 接下来读什么
 

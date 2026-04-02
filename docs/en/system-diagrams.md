@@ -303,6 +303,44 @@ Primary code anchors:
 - `workspace/source/opencode/packages/opencode/src/skill/discovery.ts`
 - `workspace/source/opencode/packages/opencode/src/tool/skill.ts`
 
+## 8. SessionPrompt vs SyncEvent vs Bus
+
+This diagram is the shortest way to avoid a common misunderstanding: `Bus` is not the single control backbone of Opencode. `SessionPrompt` owns interactive orchestration, `SyncEvent` owns durable projection flow, and `Bus` exposes observable runtime notifications.
+
+```mermaid
+flowchart TD
+    User[User Request]
+    Routes[CLI / TUI / Server Routes]
+    Prompt[SessionPrompt<br/>control flow owner]
+    Processor[SessionProcessor / LLM loop]
+    Session[Session APIs]
+    Sync[SyncEvent.run<br/>projectors / DB]
+    Bus[Bus.publish<br/>instance-scoped notifications]
+    SSE[SSE / event subscribers]
+    UI[UI / CLI observers]
+    Plugins[Plugins / watchers / status listeners]
+
+    User --> Routes
+    Routes --> Prompt
+    Prompt --> Processor
+    Prompt --> Session
+    Session --> Sync
+    Sync -. optional republish .-> Bus
+    Prompt -. status / side-channel events .-> Bus
+    Bus --> SSE
+    Bus --> UI
+    Bus --> Plugins
+```
+
+Primary code anchors:
+
+- `workspace/source/opencode/packages/opencode/src/session/prompt.ts`
+- `workspace/source/opencode/packages/opencode/src/session/index.ts`
+- `workspace/source/opencode/packages/opencode/src/sync/index.ts`
+- `workspace/source/opencode/packages/opencode/src/bus/index.ts`
+- `workspace/source/opencode/packages/opencode/src/server/routes/event.ts`
+- `workspace/source/opencode/packages/opencode/src/session/status.ts`
+
 ## Next Reading
 
 - `architecture.md`
