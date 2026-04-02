@@ -4,6 +4,8 @@
 
 这份文档是当前固定版本 Opencode 的长期系统视图。只有在具体分析轮次已经确认主要模块和运行时链路之后，才应该把结论提升到这里。
 
+配套的可视化图集见 `system-diagrams.md`。
+
 ## 系统边界
 
 - 目标应用：`OPENCODE_VERSION.md` 中固定的 Opencode 版本

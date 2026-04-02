@@ -4,6 +4,8 @@
 
 This document is the long-term system view for the pinned Opencode version. It should be updated only after concrete analysis passes confirm the major modules and runtime paths.
 
+For a visual companion, see `system-diagrams.md`.
+
 ## System Boundary
 
 - Target application: Opencode at the version pinned in `OPENCODE_VERSION.md`

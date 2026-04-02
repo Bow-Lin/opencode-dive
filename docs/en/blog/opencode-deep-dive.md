@@ -8,6 +8,8 @@ This article is written for engineers who want to understand how Opencode is str
 
 The main article explains the design in narrative form and only cites the most important code anchors. The appendices under `../modules/` and `../callflows/` carry the detailed evidence trail.
 
+If you want the same structure in visual form first, read `../system-diagrams.md` before diving into the appendices.
+
 ## 1. What Opencode Actually Is
 
 Opencode is not just a command-line wrapper around a language model. The pinned version is a TypeScript monorepo whose behavioral core lives in `workspace/source/opencode/packages/opencode`, while additional packages provide web, desktop, SDK, plugin, and UI surfaces.
@@ -104,6 +106,7 @@ That is why the most effective reading order is:
 
 ## Where To Read Next
 
+- Visual diagrams: `../system-diagrams.md`
 - Architecture overview: `../architecture.md`
 - Repository map: `../repo-map.md`
 - Module appendices: `../modules/`
