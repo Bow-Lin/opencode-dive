@@ -55,6 +55,8 @@ That wrapper adds two shared behaviors:
 1. validate arguments with the tool's Zod schema before execution;
 2. truncate long textual output through `Truncate.output(...)` unless the tool already marked `metadata.truncated`.
 
+For the dedicated context-management view of tool-output truncation and old tool-result pruning, see `docs/en/modules/context-management.md`.
+
 ### 2. Build Tool Registry
 
 `ToolRegistry.Service` builds the available tool universe from:

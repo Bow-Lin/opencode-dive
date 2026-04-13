@@ -55,6 +55,8 @@ tool 层不是通过独立命令启动的。当 `SessionPrompt` 准备一次模�
 1. 在执行前用 tool 的 Zod schema 校验参数
 2. 除非 `metadata.truncated` 已显式声明，否则通过 `Truncate.output(...)` 截断过长文本输出
 
+关于 tool-output truncation 与旧 tool-result pruning 在上下文管理里的作用，见 `docs/zh/modules/context-management.md`。
+
 ### 2. 构建 Tool Registry
 
 `ToolRegistry.Service` 从以下来源构建可用 tool 集：

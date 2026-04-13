@@ -93,6 +93,8 @@ Server plugins ultimately produce `Hooks` objects.
 
 Those hooks are stored in deterministic order and triggered sequentially through `Plugin.trigger(...)`.
 
+Dedicated hook-surface analysis now lives in `docs/en/modules/hooks.md`.
+
 Observed hook surfaces in the runtime include:
 
 - `tool.definition`

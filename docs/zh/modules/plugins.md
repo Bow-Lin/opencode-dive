@@ -93,6 +93,8 @@ Server plugins 最终会产出 `Hooks` 对象。
 
 这些 hooks 会按确定顺序存储，并通过 `Plugin.trigger(...)` 顺序触发。
 
+专门的 hook 表面分析现已单独整理在 `docs/zh/modules/hooks.md`。
+
 当前在运行时里可以观察到的 hook 表面包括：
 
 - `tool.definition`

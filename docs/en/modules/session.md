@@ -104,6 +104,8 @@ Before a model call, `SessionPrompt` typically uses:
 
 This means the session module stores canonical state in DB form, while `MessageV2` is responsible for projecting that state back into runtime/model form.
 
+For the dedicated analysis of summary compaction, replay filtering, and tool-output pruning, see `docs/en/modules/context-management.md`.
+
 ## Upstream And Downstream Dependencies
 
 Upstream:

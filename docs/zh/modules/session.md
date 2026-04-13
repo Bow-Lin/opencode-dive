@@ -104,6 +104,8 @@ session 模块由 `Session.defaultLayer` 初始化，但它的持久化行为依
 
 这说明 session 模块负责以数据库形态保存规范状态，而 `MessageV2` 负责把这份状态重新投影回 runtime / model 形态。
 
+关于摘要式 compaction、replay 裁剪和 tool-output pruning 的专门分析，见 `docs/zh/modules/context-management.md`。
+
 ## 上下游依赖
 
 Upstream:
