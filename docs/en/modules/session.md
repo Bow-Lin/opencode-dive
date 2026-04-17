@@ -106,6 +106,8 @@ This means the session module stores canonical state in DB form, while `MessageV
 
 For the dedicated analysis of summary compaction, replay filtering, and tool-output pruning, see `docs/en/modules/context-management.md`.
 
+For the dedicated analysis of instruction-file memory, read-time local instruction loading, session replay memory, and skill instruction loading, see `docs/en/modules/memory-management.md`.
+
 ## Upstream And Downstream Dependencies
 
 Upstream:

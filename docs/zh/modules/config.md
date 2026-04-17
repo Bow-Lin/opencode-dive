@@ -100,6 +100,7 @@ Downstream:
 
 - `cli/network.ts` 中的网络 / server 配置解析
 - `session/instruction.ts` 中的 instruction 加载
+- `docs/zh/modules/memory-management.md` 中整理的 memory 加载行为
 - `tool/registry.ts` 中的 tool 可用性
 - `provider/provider.ts` 中的 provider/model 配置
 - `agent/agent.ts` 中的 agent 行为与权限

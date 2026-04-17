@@ -106,6 +106,8 @@ session 模块由 `Session.defaultLayer` 初始化，但它的持久化行为依
 
 关于摘要式 compaction、replay 裁剪和 tool-output pruning 的专门分析，见 `docs/zh/modules/context-management.md`。
 
+关于 instruction-file memory、read-time 局部 instruction 加载、session replay memory 和 skill instruction 加载的专门分析，见 `docs/zh/modules/memory-management.md`。
+
 ## 上下游依赖
 
 Upstream:

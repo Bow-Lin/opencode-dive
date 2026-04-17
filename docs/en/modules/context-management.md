@@ -95,6 +95,21 @@ The compaction process:
 
 If compaction itself returns `compact`, Opencode records `ContextOverflowError` and returns `stop`.
 
+Detailed algorithm:
+
+1. `SessionPrompt.runLoop(...)` first records a compaction request instead of compacting inline. Local token overflow after a finished assistant step calls `SessionCompaction.create({ auto: true })`; provider-side overflow from an unfinished assistant message calls `create({ auto: true, overflow: true })`.
+2. `SessionCompaction.create(...)` writes a new user message with the original agent/model and attaches a `type: "compaction"` part carrying `auto` and optional `overflow`. This makes compaction a normal transcript task that the next loop iteration can pick up.
+3. On the next iteration, `runLoop(...)` finds recent pending `compaction` parts before starting another normal model request. It calls `SessionCompaction.process(...)` with the current compacted message list, `parentID` set to the compaction user message, and the part's `auto` / `overflow` flags.
+4. `process(...)` validates that the parent message exists and is a user message. If the compaction was provider-overflow-triggered, it scans backward from the compaction marker for the nearest earlier non-compaction user message. When found and there is still other user content before it, that earlier user message becomes `replay`, and the summarization input is truncated to messages before that replay point.
+5. The compaction model is chosen from the hidden `compaction` agent if that agent has an explicit model; otherwise it reuses the triggering user message's model. Plugins can replace or extend the compaction prompt through `experimental.session.compacting`.
+6. The summarization input is cloned, passed through `experimental.chat.messages.transform`, and projected with `MessageV2.toModelMessages(..., { stripMedia: true })`. This means compaction summarizes the transcript without media attachments.
+7. `process(...)` creates a new assistant message with `agent: "compaction"` and `summary: true`, then runs `SessionProcessor.process(...)` against the model with `tools: {}`, `system: []`, the projected transcript, and a final user prompt asking for a continuation summary.
+8. If the summary run itself returns `compact`, Opencode marks the summary assistant message with a `ContextOverflowError`, sets `finish = "error"`, persists it, and returns `stop`.
+9. If the summary run returns `continue` and the compaction was automatic, Opencode appends a synthetic continuation user message. For provider-overflow replay, it recreates the earlier replay user message and copies its non-compaction parts; media file parts are replaced by text placeholders like `[Attached image/png: file]`. Without replay, it creates a synthetic text prompt telling the next loop to continue or ask for clarification, with an extra media-overflow warning when relevant.
+10. If the summary assistant has an error, `process(...)` returns `stop`; otherwise a successful `continue` publishes `session.compacted` and returns `continue` to the loop.
+
+The `summary: true` model call has two prompt layers. The hidden `compaction` agent contributes its own agent prompt from `agent/prompt/compaction.txt`, which tells the model to summarize the conversation for continuation and not answer questions from the original conversation. `SessionCompaction.process(...)` then appends a final user prompt. By default, that prompt asks for "a detailed prompt for continuing our conversation above", instructs the model not to call tools and to respond only with summary text, and suggests sections for `Goal`, `Instructions`, `Discoveries`, `Accomplished`, and `Relevant files / directories`. Plugins can override the whole final user prompt by returning `prompt` from `experimental.session.compacting`; otherwise Opencode uses the default prompt plus any plugin-provided `context` entries joined after it.
+
 ### 4. Replay A Smaller Runtime Window
 
 Compaction does not delete the raw transcript.

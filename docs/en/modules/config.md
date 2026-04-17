@@ -100,6 +100,7 @@ Downstream:
 
 - network/server config resolution in `cli/network.ts`
 - instruction loading in `session/instruction.ts`
+- memory-loading behavior described in `docs/en/modules/memory-management.md`
 - tool availability in `tool/registry.ts`
 - provider/model configuration in `provider/provider.ts`
 - agent behavior and permissions in `agent/agent.ts`

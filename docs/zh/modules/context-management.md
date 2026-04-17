@@ -95,6 +95,21 @@ Compaction 过程会：
 
 如果 compaction 自己也返回 `compact`，Opencode 会记录 `ContextOverflowError` 并返回 `stop`。
 
+更细的算法如下：
+
+1. `SessionPrompt.runLoop(...)` 先记录 compaction request，而不是在当前分支里直接压缩。已完成 assistant step 之后的本地 token overflow 会调用 `SessionCompaction.create({ auto: true })`；来自未完成 assistant message 的 provider-side overflow 会调用 `create({ auto: true, overflow: true })`。
+2. `SessionCompaction.create(...)` 写入一条新的 user message，沿用原 agent/model，并挂一个 `type: "compaction"` part，part 里带 `auto` 和可选 `overflow`。这让 compaction 变成 transcript 里的普通 task，下一轮 loop 才会消费它。
+3. 下一轮 iteration 中，`runLoop(...)` 会在启动普通模型请求前找到最近的 pending `compaction` part，然后用当前 compacted message list、指向 compaction user message 的 `parentID`、以及 part 上的 `auto` / `overflow` 调 `SessionCompaction.process(...)`。
+4. `process(...)` 先校验 parent message 存在且是 user message。如果这是 provider-overflow-triggered compaction，它会从 compaction marker 往前找最近一个非 compaction user message。找到后，如果该 replay 点之前仍然有其他 user 内容，这条较早 user message 会成为 `replay`，用于摘要的输入历史会被截断为 replay 点之前的 messages。
+5. compaction model 优先取隐藏 `compaction` agent 的显式 model；如果该 agent 没有配置 model，就复用触发 compaction 的 user message model。plugin 可以通过 `experimental.session.compacting` 替换或扩展 compaction prompt。
+6. 摘要输入会先 structured clone，再经过 `experimental.chat.messages.transform`，最后用 `MessageV2.toModelMessages(..., { stripMedia: true })` 投影成 model messages。因此 compaction 总结的是去掉 media attachments 后的 transcript。
+7. `process(...)` 创建一条新的 assistant message，字段包含 `agent: "compaction"` 和 `summary: true`，然后用 `SessionProcessor.process(...)` 调模型；这次调用传 `tools: {}`、`system: []`、投影后的 transcript，以及最后一条要求生成 continuation summary 的 user prompt。
+8. 如果 summary run 自己返回 `compact`，Opencode 会把这条 summary assistant message 标记为 `ContextOverflowError`，设置 `finish = "error"`，持久化后返回 `stop`。
+9. 如果 summary run 返回 `continue` 且这是自动 compaction，Opencode 会追加一条 synthetic continuation user message。provider-overflow replay 场景下，它会重建之前找到的 replay user message，并复制其中非 compaction parts；media file parts 会被替换成类似 `[Attached image/png: file]` 的文本占位。没有 replay 时，它会创建一条 synthetic text prompt，让下一轮继续或在不确定时请求澄清；如果是 media overflow，还会额外提示附件过大。
+10. 如果 summary assistant 有 error，`process(...)` 返回 `stop`；否则成功的 `continue` 会发布 `session.compacted` 并把 `continue` 返回给 loop。
+
+`summary: true` 的模型调用有两层 prompt。隐藏的 `compaction` agent 会先提供来自 `agent/prompt/compaction.txt` 的 agent prompt，要求模型为后续继续对话总结上下文，并且不要回答原对话中的问题。随后 `SessionCompaction.process(...)` 会追加最后一条 user prompt。默认情况下，这条 prompt 要求生成“用于继续上面对话的详细 prompt”，要求不要调用工具、只输出 summary text，并建议使用 `Goal`、`Instructions`、`Discoveries`、`Accomplished`、`Relevant files / directories` 这些章节。plugin 可以通过 `experimental.session.compacting` 返回 `prompt` 来整体替换这条 final user prompt；如果没有替换，Opencode 会使用默认 prompt，并把 plugin 提供的 `context` entries 接在后面。
+
 ### 4. 重放更小的 Runtime Window
 
 Compaction 不会删除原始 transcript。
